@@ -38,7 +38,33 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let morzeLetter = [];
+    let char;
+    let result = [];
+    let sum;
+    let sent = '';
+    for (let j = 0; j < expr.length; j = j + 10) {
+        char = expr.substr(j, 10);
+        if (expr[j] == '*') {
+            result.push(' ');
+        } else {
+            for (let i = 0; i < char.length; i = i + 2) {            
+                (char[i] == 1) ? (char[i + 1] == 1 ? morzeLetter.push('-') : morzeLetter.push('.')) : morzeLetter;
+            }
+            result.push(morzeLetter.join(''));
+        }
+        morzeLetter = []; 
+    }
+        result.map(letter => {
+            if (letter !== ' ') {
+                sum = MORSE_TABLE[letter];
+                console.log(sum);
+            } else {
+                sum = ' ';
+            }
+            sent = `${sent}${sum}`;
+        });
+    return sent;
 }
 
 module.exports = {
